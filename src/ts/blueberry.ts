@@ -3,6 +3,8 @@ import { initializeHeap } from './blueberry_heap';
 import { BlueberryAllocation, BlueberryAllocationEnum, Matrix, Pointer, bluebCreateInt32Array, bluebMapMatrix, bluebMapModel } from './blueberry_memory';
 import { make_environment, rand, assert, } from './blueberry_utils'
 
+import wasmUrl from './blueberry.wasm?url';
+
 export type BlueberryInstance = {
     wasm: WebAssembly.Instance;
 
@@ -19,7 +21,7 @@ async function initBlueberry() {
         "assert": assert
     }) as any;
 
-    WebAssembly.instantiateStreaming(fetch('./blueberry.wasm'), {
+    WebAssembly.instantiateStreaming(fetch(wasmUrl), {
         env: env
     }).then((w) => {
         if (blueberryInstance !== null)
