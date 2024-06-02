@@ -1,4 +1,3 @@
-import init from './blueberry.wasm?init'
 import { initializeHeap } from './blueberry_heap';
 
 import { BlueberryAllocation, BlueberryAllocationEnum, Matrix, Pointer, bluebCreateInt32Array, bluebMapMatrix, bluebMapModel } from './blueberry_memory';
@@ -20,14 +19,14 @@ async function initBlueberry() {
         "assert": assert
     }) as any;
 
-    init({
+    WebAssembly.instantiateStreaming(fetch('./blueberry.wasm'), {
         env: env
     }).then((w) => {
         if (blueberryInstance !== null)
             return;
 
         blueberryInstance = {
-            wasm: w,
+            wasm: w.instance,
             allocations: []
         };
 
@@ -59,8 +58,6 @@ async function initBlueberry() {
         }
 
         console.log(bluebMapModel(model));
-
-        // console.log();
     })
 }
 

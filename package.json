@@ -1,11 +1,23 @@
 {
-  "name": "blueberry.js",
-  "version": "1.0.0",
+  "name": "blueb.js",
+  "version": "1.0.5",
   "description": "",
-  "main": "index.js",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "directory": "dist"
+  },
+  "main": "dist/blueberry.js",
+  "types": "dist/blueberry.d.ts",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Maksim Jaroslavceavas",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.13.0",
+    "typescript": "^5.4.5"
+  }
 }
