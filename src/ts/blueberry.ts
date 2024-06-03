@@ -4,6 +4,7 @@ import { BlueberryAllocation, BlueberryAllocationEnum, Matrix, Pointer, bluebCre
 import { make_environment, rand, assert, } from './blueberry_utils'
 
 import wasmUrl from './blueberry.wasm?url';
+import { bluebMseCost, bluebNewModel, bluebTrainGradientDescent } from './blueberry.h';
 
 export type BlueberryInstance = {
     wasm: WebAssembly.Instance;
@@ -49,7 +50,7 @@ async function initBlueberry() {
         ]);
 
         // Create model
-        let model = bluebCreateModel([2, 2, 1]);
+        let model = bluebNewModel([2, 2, 1]);
 
         // Train network and print result
         for (let i = 0; i < 100; ++i) {
@@ -89,38 +90,4 @@ export function bluebCreateMatrix(matrix: Matrix): Pointer {
     mapped.value.set(arr);
 
     return matrixPtr;
-}
-
-export function bluebCreateModel(arr: number[]): Pointer {
-    if (blueberryInstance === null)
-        return null;
-
-    const ex = blueberryInstance.wasm.exports;
-    const arch = bluebCreateInt32Array(arr);
-    let model = (ex.blueb_new_model as Function)(arch, arr.length);
-    (ex.blueb_rand_model as Function)(model, -1.0, 1.0);
-    // (ex.lemon_free as Function)(arch); // Todo fix this
-
-    blueberryInstance.allocations.push({
-        ptr: model,
-        kind: BlueberryAllocationEnum.Model
-    });
-
-    return model;
-}
-
-export function bluebTrainGradientDescent(model: Pointer, inputs: Pointer, outputs: Pointer, sampleCount: number, epoch: number, learningRate: number) {
-    if (blueberryInstance === null)
-        return;
-
-    const ex = blueberryInstance.wasm.exports;
-    (ex.blueb_train_gradient_descent as Function)(model, inputs, outputs, sampleCount, epoch, learningRate);
-}
-
-export function bluebMseCost(model: Pointer, inputs: Pointer, outputs: Pointer, sampleCount: number): number {
-    if (blueberryInstance === null)
-        return 0.0;
-
-    const ex = blueberryInstance.wasm.exports;
-    return (ex.blueb_mse_cost as Function)(model, inputs, outputs, sampleCount);
 }
