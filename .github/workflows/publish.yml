@@ -1,8 +1,9 @@
 name: "🚀 release"
 
 on:
-    release:
-        types: [published]
+  push:
+    branches:
+      - master
 
 jobs:
     release:
@@ -20,6 +21,5 @@ jobs:
 
             - name: 🚀 publish
               run: npm publish --access public
-              working-directory: my-package
               env:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
