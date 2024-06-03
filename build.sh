@@ -1,6 +1,20 @@
 #!/bin/sh
 
-# set -xe
-# 
-# clang -Wall -Wextra -Ilemon --target=wasm32 -o blueberry.o -c ./blueberry.c
-# wasm-ld -m wasm32 --no-entry --export-all --allow-undefined -o blueberry.wasm blueberry.o 
+# Build wasm module
+set -xe
+
+clang \
+    -Wall \
+    -Wextra \
+    -I3dparty/caifu/lemon \
+    -I3dparty/caifu \
+    --target=wasm32 \
+    -o blueberry.o \
+    -c ./src/c/blueberry.c \
+
+wasm-ld \
+    -m wasm32 \
+    --no-entry --export-all --allow-undefined \
+    -o dist/blueberry.wasm blueberry.o \
+
+rm blueberry.o

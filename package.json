@@ -1,6 +1,6 @@
 {
   "name": "blueb.js",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "files": [
     "dist"
@@ -11,7 +11,7 @@
   "main": "dist/blueberry.js",
   "types": "dist/blueberry.d.ts",
   "scripts": {
-    "build": "tsc && cp ./src/ts/blueberry.wasm ./dist/blueberry.wasm",
+    "build": "tsc && bash ./build.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Maksim Jaroslavceavas",
