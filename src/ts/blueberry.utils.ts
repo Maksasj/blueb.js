@@ -17,6 +17,17 @@ export function rand() {
 }
 
 export function assert(exp: any) {
-    if (exp === 0)
+    if (exp === 0) {
+        console.log(exp);
         console.error("WASM assertion failed");
+    }
+}
+
+export function concatenateArrays<Type>(matrix: Type[][]) {
+    let arr: Type[] = [];
+    
+    for (var row of matrix)
+        arr = arr.concat(row);
+
+    return arr;
 }

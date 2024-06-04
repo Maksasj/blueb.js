@@ -1,10 +1,11 @@
-import { initializeHeap } from './blueberry_heap';
+import { initializeHeap } from './blueberry.heap';
 
-import { BlueberryAllocation, BlueberryAllocationEnum, Matrix, Pointer, bluebCreateInt32Array, bluebMapMatrix, bluebMapModel } from './blueberry_memory';
-import { make_environment, rand, assert, } from './blueberry_utils'
+import { BlueberryAllocation, BlueberryAllocationEnum, Pointer } from './blueberry.mem';
+import { make_environment, rand, assert, concatenateArrays, } from './blueberry.utils'
 
 import wasmUrl from './blueberry.wasm?url';
 import { bluebMseCost, bluebNewModel, bluebTrainGradientDescent } from './blueberry.h';
+import { bluebCreateModel, peachMapMatrix, bluebMapModel, paechCreateMatrix } from './blueberry.map';
 
 export type BlueberryInstance = {
     wasm: WebAssembly.Instance;
@@ -35,14 +36,14 @@ async function initBlueberry() {
 
         initializeHeap(blueberryInstance);
 
-        const inputs = bluebCreateMatrix([
+        const inputs = paechCreateMatrix([
             [0.0, 0.0],
             [0.0, 1.0],
             [1.0, 0.0],
             [1.0, 1.0]
         ]);
 
-        const outputs = bluebCreateMatrix([
+        const outputs = paechCreateMatrix([
             [0.0],
             [0.0],
             [0.0],
@@ -50,8 +51,9 @@ async function initBlueberry() {
         ]);
 
         // Create model
-        let model = bluebNewModel([2, 2, 1]);
+        let model = bluebCreateModel([2, 2, 1]);
 
+        /*
         // Train network and print result
         for (let i = 0; i < 100; ++i) {
             bluebTrainGradientDescent(model, inputs, outputs, 4, 1, 0.05);
@@ -61,18 +63,18 @@ async function initBlueberry() {
         }
 
         console.log(bluebMapModel(model));
+        */
     })
 }
 
 initBlueberry();
 
-export function bluebCreateMatrix(matrix: Matrix): Pointer {
+/*
+export function bluebCreateMatrix(matrix: number[][]): Pointer {
     if (blueberryInstance === null)
         return null;
 
-    let arr: number[] = [];
-    for (var row of matrix)
-        arr = arr.concat(row);
+    const arr = concatenateArrays<number>(matrix);
 
     const ex = blueberryInstance.wasm.exports;
 
@@ -82,7 +84,7 @@ export function bluebCreateMatrix(matrix: Matrix): Pointer {
         kind: BlueberryAllocationEnum.Matrix
     });
 
-    let mapped = bluebMapMatrix(matrixPtr);
+    let mapped = peachMapMatrix(matrixPtr);
 
     if(mapped == null)
         return null;
@@ -91,3 +93,4 @@ export function bluebCreateMatrix(matrix: Matrix): Pointer {
 
     return matrixPtr;
 }
+*/

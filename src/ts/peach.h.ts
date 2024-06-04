@@ -1,5 +1,6 @@
 import { blueberryInstance } from "./blueberry";
-import { Pointer, bluebMapMatrix } from "./blueberry_memory";
+import { peachMapMatrix } from "./blueberry.map";
+import { Pointer } from "./blueberry.mem";
 
 export function peachSigmoid(n: number) : number {
     if (blueberryInstance === null)
@@ -227,5 +228,5 @@ export function peachMatrixPrint(m: Pointer) {
     if (blueberryInstance === null)
         return;
 
-    console.log(bluebMapMatrix(m));
+    console.log(peachMapMatrix(m));
 }

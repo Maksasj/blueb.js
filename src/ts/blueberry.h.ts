@@ -1,25 +1,19 @@
 import { blueberryInstance } from "./blueberry";
-import { BlueberryAllocationEnum, Pointer, bluebCreateInt32Array, bluebMapModel } from "./blueberry_memory";
+import { bluebMapModel } from "./blueberry.map";
+import { BlueberryAllocationEnum, Pointer } from "./blueberry.mem";
 
-// Todo since blueberry.h.ts is just WASM->ts bindings
-// this function should not really accept array as input
-// This function probably should accept just a pointer to an array
-export function bluebNewModel(arr: number[]): Pointer {
+export function bluebNewModel(arr: Pointer, length: number): Pointer {
     if (blueberryInstance === null)
         return null;
 
+    if(arr === null)
+        return null;
+
+    if(length <= 0)
+        return null;
+
     const ex = blueberryInstance.wasm.exports;
-    const arch = bluebCreateInt32Array(arr);
-    let model = (ex.blueb_new_model as Function)(arch, arr.length);
-    (ex.blueb_rand_model as Function)(model, -1.0, 1.0);
-    // (ex.lemon_free as Function)(arch); // Todo fix this
-
-    blueberryInstance.allocations.push({
-        ptr: model,
-        kind: BlueberryAllocationEnum.Model
-    });
-
-    return model;
+    return (ex.blueb_new_model as Function)(arr, length);
 }
 
 export function bluebFreeModel(model: Pointer) {

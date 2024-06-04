@@ -1,5 +1,5 @@
 import { blueberryInstance } from "./blueberry";
-import { Pointer } from "./blueberry_memory";
+import { Pointer } from "./blueberry.mem";
 
 export function lemon_init(heap: Pointer, size: number) {
     if (blueberryInstance === null)
