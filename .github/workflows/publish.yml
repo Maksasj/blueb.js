@@ -19,16 +19,18 @@ jobs:
                   node-version: 20
                   registry-url: https://registry.npmjs.org
 
-            - name: Setup clang and wasm-ld
+            - name: 🍙 setup clang
               run: sudo apt update && sudo apt install clang && sudo apt install llvm
 
-            - name: init submodules
+            - name: 🌜 init submodules
               run: git submodule update --init --remote --recursive
 
-            - name: pull submodules
+            - name: 💫 pull submodules
               run: git submodule update --recursive
-            - name: A
+
+            - name: 🤬 wasm-ld workaround
               run: sudo ln -s $(which wasm-ld-13 || which wasm-ld-12 || which wasm-ld-11 || which wasm-ld-10) /usr/bin/wasm-ld
+            
             - name: 🏗️ build
               run: npm run build
 
