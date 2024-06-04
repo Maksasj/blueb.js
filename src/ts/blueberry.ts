@@ -14,7 +14,7 @@ export type BlueberryInstance = {
 
 export let blueberryInstance: BlueberryInstance | null = null;
 
-async function initBlueberry() : Promise<BlueberryInstance | null> {
+export async function bluebInit() : Promise<BlueberryInstance | null> {
     const env = make_environment({
         "rand": rand,
         "powf": Math.pow,
