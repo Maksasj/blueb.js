@@ -35,7 +35,8 @@ async function initBlueberry() {
         };
 
         initializeHeap(blueberryInstance);
-
+        
+        /*
         const inputs = paechCreateMatrix([
             [0.0, 0.0],
             [0.0, 1.0],
@@ -49,9 +50,9 @@ async function initBlueberry() {
             [0.0],
             [1.0]
         ]);
-
         // Create model
         let model = bluebCreateModel([2, 2, 1]);
+        */
 
         /*
         // Train network and print result
