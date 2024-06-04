@@ -19,7 +19,11 @@ jobs:
                   node-version: 20
                   registry-url: https://registry.npmjs.org
 
+            # - name: 🚀 publish
+            #   run: npm publish --access public
+            #   env:
+            #       NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
             - name: 🚀 publish
-              run: npm publish --access public
-              env:
-                  NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+              uses: JS-DevTools/npm-publish@v3
+              with:
+                token: ${{ secrets.NPM_AUTH_TOKEN }}
