@@ -19,7 +19,7 @@ jobs:
                   node-version: 20
                   registry-url: https://registry.npmjs.org
             - name: Setup clang
-              run: apt update && apt install clang 
+              run: sudo apt update && apt install clang 
 
             - name: init submodules
               run: git submodule update --init --remote --recursive
