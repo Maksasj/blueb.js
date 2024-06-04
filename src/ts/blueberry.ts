@@ -10,8 +10,11 @@ export * from './blueberry.heap'
 export * from './blueberry.map'
 export * from './blueberry.mem'
 export * from './blueberry.utils'
+
 export * from './lemon.h'
+
 export * from './peach.h'
+export * from './peach.map'
 
 export type BlueberryInstance = {
     wasm: WebAssembly.Instance;
