@@ -5,9 +5,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "directory": "dist"
-  },
   "main": "dist/blueberry.js",
   "types": "dist/blueberry.d.ts",
   "scripts": {
