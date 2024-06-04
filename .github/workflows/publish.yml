@@ -19,6 +19,12 @@ jobs:
                   node-version: 20
                   registry-url: https://registry.npmjs.org
 
+            - name: init submodules
+              run: git submodule update --init --remote --recursive
+              
+            - name: pull submodules
+              run: git submodule update --recursive
+
             - name: 🏗️ build
               run: npm run build
 
