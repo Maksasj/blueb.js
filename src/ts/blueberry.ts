@@ -1,11 +1,9 @@
 import { initializeHeap } from './blueberry.heap';
 
-import { BlueberryAllocation, BlueberryAllocationEnum, Pointer } from './blueberry.mem';
-import { make_environment, rand, assert, concatenateArrays, } from './blueberry.utils'
+import { BlueberryAllocation } from './blueberry.mem';
+import { make_environment, rand, assert } from './blueberry.utils'
 
 import wasmUrl from './blueberry.wasm?url';
-import { bluebMseCost, bluebNewModel, bluebTrainGradientDescent } from './blueberry.h';
-import { bluebCreateModel, peachMapMatrix, bluebMapModel, paechCreateMatrix } from './blueberry.map';
 
 export type BlueberryInstance = {
     wasm: WebAssembly.Instance;
@@ -35,6 +33,8 @@ async function initBlueberry() {
         };
 
         initializeHeap(blueberryInstance);
+
+        console.log("Initialized blueberry instance");
         
         /*
         const inputs = paechCreateMatrix([
