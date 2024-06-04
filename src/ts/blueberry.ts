@@ -5,6 +5,14 @@ import { make_environment, rand, assert } from './blueberry.utils'
 
 import wasmUrl from './blueberry.wasm?url';
 
+export * from './blueberry.h'
+export * from './blueberry.heap'
+export * from './blueberry.map'
+export * from './blueberry.mem'
+export * from './blueberry.utils'
+export * from './lemon.h'
+export * from './peach.h'
+
 export type BlueberryInstance = {
     wasm: WebAssembly.Instance;
 
