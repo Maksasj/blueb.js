@@ -20,7 +20,7 @@ jobs:
                   registry-url: https://registry.npmjs.org
 
             - name: Setup clang and wasm-ld
-              run: sudo apt update && sudo apt install clang && sudo apt install lld-14
+              run: sudo apt update && sudo apt install clang && sudo apt install llvm
 
             - name: init submodules
               run: git submodule update --init --remote --recursive
